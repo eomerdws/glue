@@ -38,14 +38,14 @@ class JSONFormat(BaseJSONFormat):
         context = super(JSONFormat, self).get_context(*args, **kwargs)
 
         frames = OrderedDict([[i['filename'], {'filename': i['filename'],
-                                        'frame': {'x': i['x'],
-                                                  'y': i['y'],
+                                        'frame': {'x': i['x'] if i['x'] > 0 else i['x'] * -1,
+                                                  'y':  i['y'] if i['y'] > 0 else i['y'] * -1,
                                                   'w': i['width'],
                                                   'h': i['height']},
                                         'rotated': False,
                                         'trimmed': False,
-                                        'spriteSourceSize': {'x': i['x'],
-                                                             'y': i['y'],
+                                        'spriteSourceSize': {'x': i['x'] if i['x'] > 0 else i['x'] * -1,
+                                                             'y': i['y'] if i['y'] > 0 else i['y'] * -1,
                                                              'w': i['width'],
                                                              'h': i['height']},
                                         'sourceSize': {'w': i['original_width'],
